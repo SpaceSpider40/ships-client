@@ -1,10 +1,10 @@
 {
-  "name": "${PROJECT_NAME}",
+  "name": "client",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc -w"
   },
   "dependencies": {},
   "devDependencies": {

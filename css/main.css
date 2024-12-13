@@ -1,0 +1,64 @@
+﻿* {
+    font-family: "Jacquard 24", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: ghostwhite;
+}
+
+body {
+    background: black;
+}
+
+#main-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+#main-menu > h1 {
+    align-self: center;
+}
+
+#main-menu > h1 {
+    font-size: 1000%;
+}
+
+#main-menu > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+}
+
+#main-menu > div button {
+    font-size: 500%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+#main-menu > div input {
+    font-size: 300%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    width: fit-content;
+    align-self: center;
+}
+
+#main-menu > div button:hover {
+    text-indent: 5%;
+
+    transition-duration: 0.2s;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.hide {
+    display: none;
+}
