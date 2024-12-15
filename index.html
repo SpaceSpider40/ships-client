@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&display=swap" rel="stylesheet">
     <!--  Style  -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/new_room.css">
+    <link rel="stylesheet" href="css/utils.css">
     <!--  JS  -->
     <script src="dist/index.js"></script>
 </head>
@@ -27,13 +29,43 @@
         <button id="create-room"
                 onmouseenter="selectionIndicator(this, true)"
                 onmouseout="selectionIndicator(this, false)"
+                onclick="switchPage('room-menu')"
         >
             Create game
         </button>
 
         <label for="room-invite-code"></label>
-        <input id="room-invite-code" type="text" placeholder="invite code"/>
+        <input id="room-invite-code" type="text" placeholder="Invite code"/>
     </div>
+</div>
+<div id="room-menu" class="hide">
+    <h3>New game</h3>
+
+    <p>Invite code: 1234567891123456</p>
+
+    <table>
+        <tr>
+            <td>
+                <label>
+                    <input type="text" placeholder="Player name"/>
+                </label>
+            </td>
+            <td>
+                <button>Ready</button>
+            </td>
+            <td>
+                <button>Kick</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <button
+            onclick="switchPage('main-menu')"
+            onmouseenter="selectionIndicator(this, true)"
+            onmouseout="selectionIndicator(this, false)"
+    >
+    </button>
 </div>
 </body>
 </html>

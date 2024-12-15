@@ -1,11 +1,4 @@
-﻿* {
-    font-family: "Jacquard 24", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    color: ghostwhite;
-}
-
-body {
+﻿body {
     background: black;
 }
 
@@ -52,13 +45,10 @@ body {
     text-indent: 5%;
 
     transition-duration: 0.2s;
+    color: #fff;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-}
-
-.hide {
-    display: none;
 }
