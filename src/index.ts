@@ -28,3 +28,5 @@ function switchPage(pageId: string): void {
         currentPageId = pageId;
     }
 }
+
+window.onload = () => window.alert("co?");
