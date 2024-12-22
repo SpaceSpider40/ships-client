@@ -1,8 +1,22 @@
-function selectionIndicator(self: HTMLElement, show: boolean): void {
-    if (show)
-        self.textContent = `> ${self.textContent ?? ''}`
-    else
-        self.textContent = (self.textContent ?? '').replace(/>\s*/, '')
+
+function registerSelectIndicators(): void {
+    const elements = document.getElementsByClassName("select-indicator") as HTMLCollectionOf<HTMLElement>;
+
+    for (const element of elements) {
+        element.onmouseover = () => {
+            element.textContent = `>${element.textContent}`;
+        }
+
+        element.onmouseout = () => {
+            element.textContent = element.textContent?.replace(">", "")??"";
+        }
+    }
+}
+
+function registerButtons(): void {
+    document.getElementById("create-room")!.onclick = () => {
+        switchPage("room-menu")
+    }
 }
 
 function hide(self: HTMLElement): void {
@@ -14,7 +28,6 @@ function show(self: HTMLElement): void {
 }
 
 let currentPageId: string = 'main-menu';
-
 function switchPage(pageId: string): void {
     const element = document.getElementById(pageId);
 
@@ -29,4 +42,7 @@ function switchPage(pageId: string): void {
     }
 }
 
-window.onload = () => window.alert("co?");
+window.onload = () => {
+    registerSelectIndicators();
+    registerButtons();
+}

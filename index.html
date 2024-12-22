@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ships</title>
 
     <!--  Font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,22 +13,19 @@
     <link rel="stylesheet" href="css/new_room.css">
     <link rel="stylesheet" href="css/utils.css">
     <!--  JS  -->
-    <script src="dist/bundle.js" type="module"></script>
+    <script defer src="dist/bundle.js" type="module"></script>
 </head>
 <body>
+<!--====MAIN MENU====-->
 <div id="main-menu">
     <h1>Ships</h1>
 
     <div>
-        <button id="find-room"
-                onmouseenter="selectionIndicator(this, true)"
-                onmouseout="selectionIndicator(this, false)"
-        >
+        <button id="find-room" class="select-indicator">
             Find game
         </button>
         <button id="create-room"
-                onmouseenter="selectionIndicator(this, true)"
-                onmouseout="selectionIndicator(this, false)"
+                class="select-indicator"
                 onclick="switchPage('room-menu')"
         >
             Create game
@@ -38,6 +35,7 @@
         <input id="room-invite-code" type="text" placeholder="Invite code"/>
     </div>
 </div>
+<!--====GAME ROOM====-->
 <div id="room-menu" class="hide">
     <h3>New game</h3>
 
@@ -62,10 +60,15 @@
 
     <button
             onclick="switchPage('main-menu')"
-            onmouseenter="selectionIndicator(this, true)"
-            onmouseout="selectionIndicator(this, false)"
+            class="select-indicator"
     >
     </button>
+</div>
+<!--====GAME====-->
+<div id="game" class="hide">
+    <div id="game-screen">
+        <canvas id="game-canvas" width="800" height="600"></canvas>
+    </div>
 </div>
 </body>
 </html>
