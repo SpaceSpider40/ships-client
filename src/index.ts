@@ -1,3 +1,4 @@
+import {World} from "./World";
 
 function registerSelectIndicators(): void {
     const elements = document.getElementsByClassName("select-indicator") as HTMLCollectionOf<HTMLElement>;
@@ -45,4 +46,6 @@ function switchPage(pageId: string): void {
 window.onload = () => {
     registerSelectIndicators();
     registerButtons();
+
+    World.instance.begin();
 }

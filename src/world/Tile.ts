@@ -1,7 +1,7 @@
-import {World, WorldObject} from "../World";
+import {Object, World} from "../World";
 import {Vector} from "../math/Vector";
 
-export class Tile implements WorldObject {
+export class Tile implements Object {
     protected pos: Vector;
 
     public constructor(position: Vector) {
@@ -10,12 +10,11 @@ export class Tile implements WorldObject {
         World.instance.attachToTick(this);
     }
 
-    begin(): void {
-        console.log("tile begin");
+    public tick(t: number): void {
+
     }
 
-    tick(t: number): void {
-        console.log("Tick: number:", t);
+    public begin(): void {
 
     }
 }
