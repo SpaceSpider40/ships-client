@@ -7,11 +7,11 @@
     constructor(paths: string[]) {
         for (let path of paths) {
             if (path.startsWith("/")){
-                path.substring(1, path.length);
+                path = path.substring(1, path.length);
             }
 
-            const image = new Image();
-            image.src = path;
+            const image = document.createElement("img");
+            image.src = Sprite.PATH + path;
 
             this.images.push(image);
         }

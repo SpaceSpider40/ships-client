@@ -26,7 +26,22 @@ export class World {
         World.tickingObjects.push(obj);
     }
 
-    private startWorld(): void {
+    private createMap() {
+        new WaterTile();
+    }
+
+    public start(): void {
+        if (this.isRunning) return;
+
+        console.log(`[WORLD] Starting world`);
+
+        this.isRunning = true;
+
+        console.log(`[WORLD] creating map`);
+        this.createMap();
+        console.log(`[WORLD] Attached objects: ${World.tickingObjects.toString()}`);
+
+
         //Call begin
         for (const obj of World.tickingObjects) {
             obj.begin();
@@ -42,11 +57,5 @@ export class World {
                 obj.tick(this.timeElapsed);
             }
         }, 1000);
-    }
-
-    public begin(): void {
-        if (this.isRunning) return;
-
-        new WaterTile();
     }
 }

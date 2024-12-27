@@ -9,7 +9,7 @@ export default class WaterTile extends Tile {
     constructor() {
         super(new Vector(0, 0, 0));
 
-        this.sprite = new Sprite(["/tiles/0000.png","/tiles/0001.png","/tiles/0002.png","/tiles/0003.png"])
+        this.sprite = new Sprite(["/tiles/0001.png","/tiles/0002.png","/tiles/0003.png","/tiles/0004.png"])
     }
 
     tick(t: number) {

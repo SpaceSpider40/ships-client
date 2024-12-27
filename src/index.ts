@@ -47,5 +47,5 @@ window.onload = () => {
     registerSelectIndicators();
     registerButtons();
 
-    World.instance.begin();
+    World.instance.start();
 }
