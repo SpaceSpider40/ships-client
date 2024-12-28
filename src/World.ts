@@ -1,5 +1,8 @@
 import {Tile} from "./world/Tile";
 import WaterTile from "./world/WaterTile";
+import Vector3D from "./math/Vector3D";
+import Vector2D from "./math/Vector2D";
+import Renderer from "./Renderer";
 
 export interface Object {
     tick(t: number): void;
@@ -9,8 +12,10 @@ export interface Object {
 
 export class World {
     public static readonly instance: World = new World();
-    public static readonly context: CanvasRenderingContext2D = (<HTMLCanvasElement>document.getElementById('game-canvas'))!.getContext("2d")!
+    private static readonly context: CanvasRenderingContext2D = (<HTMLCanvasElement>document.getElementById('game-canvas'))!.getContext("2d")!
     private static readonly canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('game-canvas');
+
+    public readonly renderer: Renderer = new Renderer(<HTMLCanvasElement>document.getElementById('game-canvas'));
 
     private static tickingObjects:Object[] = [];
 

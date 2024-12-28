@@ -1,4 +1,4 @@
-export class Vector {
+export default class Vector3D {
     private _x: number;
     private _y: number;
     private _z: number;
@@ -27,7 +27,7 @@ export class Vector {
         this._z += s;
     }
 
-    addVector(vector: Vector): void {
+    addVector(vector: Vector3D): void {
         this._x += vector.x;
         this._y += vector.y;
         this._z += vector.z;
@@ -45,7 +45,7 @@ export class Vector {
         this._z -= s;
     }
 
-    subtractVector(vector: Vector): void {
+    subtractVector(vector: Vector3D): void {
         this._x -= vector.x;
         this._y -= vector.y;
         this._z -= vector.z;

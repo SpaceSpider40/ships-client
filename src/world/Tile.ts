@@ -1,10 +1,10 @@
 import {Object, World} from "../World";
-import {Vector} from "../math/Vector";
+import Vector3D from "../math/Vector3D";
 
 export class Tile implements Object {
-    protected pos: Vector;
+    protected pos: Vector3D;
 
-    public constructor(position: Vector) {
+    public constructor(position: Vector3D) {
         this.pos = position;
 
         World.instance.attachToTick(this);
