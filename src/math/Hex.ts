@@ -1,4 +1,5 @@
 ﻿import Point from "./Point";
+import {SpriteOffset} from "../Sprite";
 
 export default class Hex {
     private _q: number;
@@ -23,9 +24,9 @@ export default class Hex {
         this._s = s;
     }
 
-    public toPoint(size:number):Point{
-        const x = size * (Math.sqrt(3) * this._q + Math.sqrt(3)/2 * this._r);
-        const y = size * (3./2 * this._r);
+    public toPoint(size:number, offset:SpriteOffset):Point{
+        const x = (size - offset.x) * (Math.sqrt(3) * this._q + Math.sqrt(3)/2 * this._r);
+        const y = (size - offset.y) * (3./2 * this._r);
 
         return new Point(x, y);
     }

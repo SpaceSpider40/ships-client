@@ -1,12 +1,23 @@
-﻿export class Sprite {
+﻿export type SpriteOffset = {
+    x: number;
+    y: number;
+}
+
+export class Sprite {
+    get offset(): SpriteOffset {
+        return this._offset;
+    }
+
     private static readonly PATH: string = "./img/sprites/";
     private images: HTMLImageElement[] = [];
 
-    private currentOffset = 0;
+    private _offset: SpriteOffset;
 
-    constructor(paths: string[]) {
+    private imageIndex = 0;
+
+    constructor(paths: string[], offset: SpriteOffset = {x: 0, y: 0}) {
         for (let path of paths) {
-            if (path.startsWith("/")){
+            if (path.startsWith("/")) {
                 path = path.substring(1, path.length);
             }
 
@@ -15,15 +26,16 @@
 
             this.images.push(image);
         }
+        this._offset = offset;
     }
 
     public getImage(): HTMLImageElement {
-        this.currentOffset++;
+        this.imageIndex++;
 
-        if(this.currentOffset >= this.images.length) {
-            this.currentOffset = 0;
+        if (this.imageIndex >= this.images.length) {
+            this.imageIndex = 0;
         }
 
-        return this.images[this.currentOffset];
+        return this.images[this.imageIndex];
     }
 }

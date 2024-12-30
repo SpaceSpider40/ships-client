@@ -6,7 +6,17 @@ import Hex from "../math/Hex";
 export default class WaterTile extends Tile {
 
     constructor(pos: Hex) {
-        super(pos, 42, new Sprite(["/tiles/0001.png", "/tiles/0002.png", "/tiles/0003.png", "/tiles/0004.png"]));
+        super(
+            pos,
+            44,
+            new Sprite(
+                ["/tiles/0001.png", "/tiles/0002.png", "/tiles/0003.png", "/tiles/0004.png"],
+                {
+                    x: 0,
+                    y: 18
+                }
+            )
+        );
     }
 
     tick(t: number) {

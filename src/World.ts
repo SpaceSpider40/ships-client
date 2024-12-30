@@ -15,9 +15,9 @@ export class World {
 
     public readonly renderer: Renderer = new Renderer(<HTMLCanvasElement>document.getElementById('game-canvas'));
 
-    private static tickingObjects:Object[] = [];
+    private static tickingObjects: Object[] = [];
 
-    private timeElapsed:number = 0;
+    private timeElapsed: number = 0;
     private isRunning = false;
 
     private constructor() {
@@ -30,9 +30,11 @@ export class World {
     }
 
     private createMap() {
-        new WaterTile(new Hex(0,0,0));
-        new WaterTile(new Hex(1,-1,0));
-        new WaterTile(new Hex(2,-2,0));
+        new WaterTile(new Hex(0, 0, 0));
+        new WaterTile(new Hex(1, -1, 0));
+        new WaterTile(new Hex(1, -2, 0));
+        new WaterTile(new Hex(2, -2, 0));
+        new WaterTile(new Hex(0, -1, 1));
     }
 
     public start(): void {
