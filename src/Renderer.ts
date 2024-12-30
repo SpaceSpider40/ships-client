@@ -25,7 +25,7 @@ export default class Renderer {
 
         this.tilesToRender.sort((a, b) =>  {
             return a.pos.r - b.pos.r;
-        });//.reverse();
+        });
 
         this.tilesToRender.forEach((object) => {
             const pos = object.pos.toPoint(object.size, object.sprite.offset);
