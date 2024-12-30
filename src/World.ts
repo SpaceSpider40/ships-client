@@ -1,8 +1,6 @@
-import {Tile} from "./world/Tile";
 import WaterTile from "./world/WaterTile";
-import Vector3D from "./math/Vector3D";
-import Vector2D from "./math/Vector2D";
 import Renderer from "./Renderer";
+import Hex from "./math/Hex";
 
 export interface Object {
     tick(t: number): void;
@@ -32,7 +30,9 @@ export class World {
     }
 
     private createMap() {
-        new WaterTile();
+        new WaterTile(new Hex(0,0,0));
+        new WaterTile(new Hex(1,-1,0));
+        new WaterTile(new Hex(2,-2,0));
     }
 
     public start(): void {
@@ -55,12 +55,13 @@ export class World {
         //Begin ticking
         this.timeElapsed++;
         setInterval(() => {
-            //before every loop clear canvas
-            World.context.clearRect(0, 0, World.canvas.width, World.canvas.height);
-
             for (const obj of World.tickingObjects) {
                 obj.tick(this.timeElapsed);
             }
+
+            //render visuals
+            this.renderer.makePass();
+
         }, 1000);
     }
 }
