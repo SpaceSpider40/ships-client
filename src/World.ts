@@ -35,12 +35,16 @@ export class World {
         new WaterTile(new Hex(1, -2, 0));
         new WaterTile(new Hex(2, -2, 0));
         new WaterTile(new Hex(0, -1, 1));
+        new WaterTile(new Hex(0, -2, 1));
     }
 
     public start(): void {
         if (this.isRunning) return;
 
         console.log(`[WORLD] Starting world`);
+        World.canvas.oncontextmenu = this.onRightClick;
+
+        console.log(`[WORLD] Attaching to events`)
 
         this.isRunning = true;
 
@@ -65,5 +69,10 @@ export class World {
             this.renderer.makePass();
 
         }, 1000);
+    }
+
+    private onRightClick(evt: MouseEvent): void {
+        evt.preventDefault();
+
     }
 }

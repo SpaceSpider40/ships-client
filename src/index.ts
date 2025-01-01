@@ -1,4 +1,5 @@
 import {World} from "./World";
+import Input from "./Input";
 
 function registerSelectIndicators(): void {
     const elements = document.getElementsByClassName("select-indicator") as HTMLCollectionOf<HTMLElement>;
@@ -48,4 +49,5 @@ window.onload = () => {
     registerButtons();
 
     World.instance.start();
+    Input.instance;
 }
