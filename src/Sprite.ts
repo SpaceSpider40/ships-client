@@ -29,13 +29,21 @@ export class Sprite {
         this._offset = offset;
     }
 
+    public getNextImage(): HTMLImageElement {
+        this.next();
+
+        return this.getImage();
+    }
+
     public getImage(): HTMLImageElement {
+        return this.images[this.imageIndex];
+    }
+
+    public next():void{
         this.imageIndex++;
 
         if (this.imageIndex >= this.images.length) {
             this.imageIndex = 0;
         }
-
-        return this.images[this.imageIndex];
     }
 }

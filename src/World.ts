@@ -18,7 +18,7 @@ export class World {
     private static tickingObjects: Object[] = [];
 
     private timeElapsed: number = 0;
-    private isRunning = false;
+    private isRunning: boolean = false;
 
     private constructor() {
     }
@@ -58,17 +58,18 @@ export class World {
             obj.begin();
         }
 
-        //Begin ticking
-        this.timeElapsed++;
         setInterval(() => {
+            //Begin ticking
+            this.timeElapsed++;
+
             for (const obj of World.tickingObjects) {
                 obj.tick(this.timeElapsed);
             }
 
             //render visuals
-            this.renderer.makePass();
+            this.renderer.makePass(this.timeElapsed);
 
-        }, 1000);
+        }, 16.6);
     }
 
     private onRightClick(evt: MouseEvent): void {
