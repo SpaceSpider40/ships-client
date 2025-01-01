@@ -1,44 +1,88 @@
-﻿export default class Input {
-    get cursorX(): number {
-        return this._cursorX;
+﻿import Point from "./math/Point";
+
+export interface InputListener {
+    onLMBDown?: (target: Point) => void;
+    onLMBUp?: (target: Point) => void;
+    onRMBDown?: (target: Point) => void;
+    onRMBUp?: (target: Point) => void;
+    onMouseMove?: (target: Point) => void;
+}
+
+export class Input {
+    get cursorPosition(): Point {
+        return this._cursorPosition;
     }
-    get cursorY(): number {
-        return this._cursorY;
+    get isLeftBtnDown(): boolean {
+        return this._isLeftBtnDown;
+    }
+    get isRightBtnDown(): boolean {
+        return this._isRightBtnDown;
     }
 
     public static instance: Input = new Input();
-    private _cursorX: number = 0;
-    private _cursorY: number = 0;
+
+    private static subscribedListeners: InputListener[] = [];
+
+    private _cursorPosition: Point = new Point(0, 0);
+
+    private _isLeftBtnDown: boolean = false;
+    private _isRightBtnDown: boolean = false;
 
     private canvasElement = <HTMLElement>document.getElementById('game-canvas');
 
     private constructor() {
-        this.canvasElement.onmousemove = this.mouseMove;
-        this.canvasElement.onmousedown = this.mouseClick;
+        this.canvasElement.onmousemove = (ev:MouseEvent) => this.mouseMove(ev);
+        this.canvasElement.onmousedown = (ev:MouseEvent)=> this.mouseDown(ev);
+        this.canvasElement.onmouseup = (ev:MouseEvent)=> this.mouseUp(ev);
+    }
+
+    public addListener(listener: InputListener) {
+        if (!Input.subscribedListeners.includes(listener)) {
+            Input.subscribedListeners.push(listener);
+        }
+    }
+
+    private notifySubscribers(what: keyof InputListener, where: Point): void {
+        Input.subscribedListeners.forEach((listener: InputListener) => {
+            if (listener[what])
+                listener[what](where);
+        })
     }
 
     private mouseMove(ev: MouseEvent): void {
-        this._cursorX = ev.offsetX;
-        this._cursorY = ev.offsetY;
+        this._cursorPosition = new Point(ev.offsetX, ev.offsetY);
+
+        this.notifySubscribers("onMouseMove", this._cursorPosition);
     }
 
-    private mouseClick(ev: MouseEvent): void {
-        console.log('MOUSE LEFT CLICK: ', ev.button)
+    private mouseDown(ev: MouseEvent): void {
+        this._cursorPosition = new Point(ev.offsetX, ev.offsetY);
+
+        switch (ev.buttons) {
+            case 1:
+                this._isLeftBtnDown = true;
+                this.notifySubscribers("onLMBDown", this._cursorPosition);
+                break;
+            case 2:
+                this._isRightBtnDown = true;
+                this.notifySubscribers("onRMBDown", this._cursorPosition);
+                break;
+        }
     }
 
-    public onLeftClick(callback:any): void {
-        this.canvasElement.addEventListener('mousedown', (ev: MouseEvent) => {
-            if (ev.buttons === 1){
-                callback()
-            }
-        });
-    }
+    private mouseUp(ev: MouseEvent): void {
+        this._cursorPosition = new Point(ev.offsetX, ev.offsetY);
 
-    public onRightClick(callback:any): void {
-        this.canvasElement.removeEventListener('mousedown', (ev: MouseEvent) => {
-            if (ev.buttons === 2){
-                callback()
-            }
-        })
+        if (ev.buttons !== 0) return;
+
+        if (this._isLeftBtnDown){
+            this._isLeftBtnDown = false;
+            this.notifySubscribers("onLMBUp", this._cursorPosition);
+        }
+
+        if (this._isRightBtnDown){
+            this._isRightBtnDown = false;
+            this.notifySubscribers("onRMBUp", this._cursorPosition);
+        }
     }
 }

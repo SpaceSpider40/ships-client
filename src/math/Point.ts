@@ -25,4 +25,8 @@ export default class Point {
 
         return new Hex(q, r, s);
     }
+
+    public toString():string{
+        return `[${this.x},${this.y}]`;
+    }
 }

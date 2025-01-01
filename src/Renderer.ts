@@ -1,7 +1,8 @@
 ﻿import Tile from "./world/Tile";
 import Point from "./math/Point";
+import {Input, InputListener} from "./Input";
 
-export default class Renderer {
+export default class Renderer implements InputListener{
     private _canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
 
@@ -10,6 +11,8 @@ export default class Renderer {
     constructor(canvas:HTMLCanvasElement) {
         this._canvas = canvas;
         this.ctx = canvas.getContext("2d")!;
+
+        Input.instance.addListener(this);
     }
 
     public renderTile(t:Tile){
@@ -39,5 +42,11 @@ export default class Renderer {
 
     private passClear(){
         this.ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
+    }
+
+    onMouseMove(target:Point){
+        if (Input.instance.isRightBtnDown){
+            console.log(target.toString())
+        }
     }
 }
