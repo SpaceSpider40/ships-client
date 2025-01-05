@@ -3,6 +3,10 @@ import Hex from "../math/Hex";
 import {Sprite} from "../Sprite";
 
 export default class Tile implements Object {
+    protected set pos(value: Hex) {
+        this._pos = value;
+    }
+
     private _pos: Hex;
     private readonly _size: number = 0;
     private readonly _sprite: Sprite;

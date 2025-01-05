@@ -1,6 +1,8 @@
 import WaterTile from "./world/WaterTile";
 import Renderer from "./Renderer";
 import Hex from "./math/Hex";
+import WorldMap from "./WorldMap";
+import Tile from "./world/Tile";
 
 export interface Object {
     tick(t: number): void;
@@ -20,6 +22,8 @@ export class World {
     private timeElapsed: number = 0;
     private isRunning: boolean = false;
 
+    public selectedTile: Tile | null = null;
+
     private constructor() {
     }
 
@@ -30,12 +34,7 @@ export class World {
     }
 
     private createMap() {
-        new WaterTile(new Hex(0, 0, 0));
-        new WaterTile(new Hex(1, -1, 0));
-        new WaterTile(new Hex(1, -2, 0));
-        new WaterTile(new Hex(2, -2, 0));
-        new WaterTile(new Hex(0, -1, 1));
-        new WaterTile(new Hex(0, -2, 1));
+        WorldMap.instance.generateMap();
     }
 
     public start(): void {
