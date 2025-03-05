@@ -19,8 +19,22 @@ export default class Point {
     }
 
     public toHex(size:number, offset:SpriteOffset):Hex{
-        let q = (Math.sqrt(3)/3 * this._x - 1./3 * this._y) / (size + offset.x);
-        let r = (2./3 * this._y) / (size + offset.y);
+        const x = -1*this.x;
+        const y = -1*this.y;
+
+        let q = (Math.sqrt(3)/3 * x - 1./3 * y) / (size + ((-1*offset.x)/2));
+        let r = (2./3 * y) / (size + ((-1*offset.y)/2));
+        let s = -q-r;
+
+        return Hex.round(new Hex(q, r, s));
+    }
+
+    public toHex2(size:number):Hex{
+        const x = -1*this.x;
+        const y = -1*this.y;
+
+        let q = (Math.sqrt(3)/3 * x - 1./3 * y) / (size);
+        let r = (2./3 * y) / (size);
         let s = -q-r;
 
         return Hex.round(new Hex(q, r, s));

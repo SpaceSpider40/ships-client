@@ -19,6 +19,8 @@ export default class Hex {
     }
 
     constructor(q: number, r: number, s: number) {
+        if ((q+r+s)!=0) throw new Error("Hex coordinates integrity check failed")
+
         this._q = q;
         this._r = r;
         this._s = s;
@@ -55,5 +57,9 @@ export default class Hex {
         }
 
         return new Hex(q, r, s);
+    }
+
+    public toString(): string {
+        return `Hex[q:${this._q.toString()};r:${this._r.toString()};s:${this._s.toString()}]`;
     }
 }

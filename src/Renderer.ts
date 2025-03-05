@@ -1,7 +1,7 @@
 ﻿import Tile from "./world/Tile";
 import Point from "./math/Point";
-import {Input, InputListener} from "./Input";
-import {World} from "./World";
+import { Input, InputListener } from "./Input";
+import { World } from "./World";
 import Indicator from "./world/Indicator";
 
 export default class Renderer implements InputListener {
@@ -48,9 +48,15 @@ export default class Renderer implements InputListener {
             return a.pos.r - b.pos.r;
         });
 
-        this.tilesToRender.forEach((object) => {
+        const tiles = this.tilesToRender.filter((t: Tile) =>
+            this.checkBounds(t.pos.toPoint(t.size, t.sprite.offset))
+        );
+
+        tiles.forEach((object) => {
             const pos = object.pos.toPoint(object.size, object.sprite.offset);
-            const img = this.changeSprite ? object.sprite.getNextImage() : object.sprite.getImage();
+            const img = this.changeSprite
+                ? object.sprite.getNextImage()
+                : object.sprite.getImage();
 
             this.drawImage(img, pos);
         });
@@ -72,13 +78,30 @@ export default class Renderer implements InputListener {
             this.indicator = new Indicator();
         }
 
-
         this.indicator.moveTo(selectedTile.pos);
 
         // console.log(this.indicator.pos, selectedTile.pos);
 
-        this.drawImage(this.indicator.sprite.getImage(), this.indicator.pos.toPoint(this.indicator.size, this.indicator
-            .sprite.offset))
+        this.drawImage(
+            this.indicator.sprite.getImage(),
+            this.indicator.pos.toPoint(
+                this.indicator.size,
+                this.indicator.sprite.offset
+            )
+        );
+    }
+
+    private checkBounds(point: Point) {
+        // const minX = this.screenOffset.x - this._canvas.width/2 ;
+        // const minY = this.screenOffset.y - this._canvas.height/2 ;
+        // const maxX = this.screenOffset.x + this._canvas.width/2 ;
+        // const maxY = this.screenOffset.y + this._canvas.height/2 ;
+
+        // return (
+        //     point.x > minX && point.x < maxX && point.y > minY && point.y < maxY
+        // );
+
+        return true;
     }
 
     onMouseMove(target: Point) {

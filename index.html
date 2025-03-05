@@ -1,74 +1,92 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ships</title>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Ships</title>
 
-    <!--  Font  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&display=swap" rel="stylesheet">
-    <!--  Style  -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/new_room.css">
-    <link rel="stylesheet" href="css/utils.css">
-    <!--  JS  -->
-    <script defer src="dist/bundle.js" type="module"></script>
-</head>
-<body>
-<!--====MAIN MENU====-->
-<div id="main-menu" class="hide">
-    <h1>Ships</h1>
+        <!--  Font  -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Jacquard+24&display=swap"
+            rel="stylesheet"
+        />
+        <!--  Style  -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/new_room.css" />
+        <link rel="stylesheet" href="css/utils.css" />
+        <!--  JS  -->
+        <script defer src="./dist/bundle.js" type="module"></script>
+    </head>
+    <body>
+        <!--====MAIN MENU====-->
+        <div id="main-menu" class="hide">
+            <h1>Ships</h1>
 
-    <div>
-        <button id="find-room" class="select-indicator">
-            Find game
-        </button>
-        <button id="create-room"
+            <div>
+                <button id="find-room" class="select-indicator">
+                    Find game
+                </button>
+                <button
+                    id="create-room"
+                    class="select-indicator"
+                    onclick="switchPage('room-menu')"
+                >
+                    Create game
+                </button>
+
+                <label for="room-invite-code"></label>
+                <input
+                    id="room-invite-code"
+                    type="text"
+                    placeholder="Invite code"
+                />
+            </div>
+        </div>
+        <!--====GAME ROOM====-->
+        <div id="room-menu" class="hide">
+            <h3>New game</h3>
+
+            <p>Invite code: 1234567891123456</p>
+
+            <table>
+                <tr>
+                    <td>
+                        <label>
+                            <input type="text" placeholder="Player name" />
+                        </label>
+                    </td>
+                    <td>
+                        <button>Ready</button>
+                    </td>
+                    <td>
+                        <button>Kick</button>
+                    </td>
+                </tr>
+            </table>
+            as
+            <button
+                onclick="switchPage('main-menu')"
                 class="select-indicator"
-                onclick="switchPage('room-menu')"
+            ></button>
+        </div>
+        <!--====GAME====-->
+        <div
+            id="game"
+            style="width: 100vw; display: flex; justify-content: center"
         >
-            Create game
-        </button>
-
-        <label for="room-invite-code"></label>
-        <input id="room-invite-code" type="text" placeholder="Invite code"/>
-    </div>
-</div>
-<!--====GAME ROOM====-->
-<div id="room-menu" class="hide">
-    <h3>New game</h3>
-
-    <p>Invite code: 1234567891123456</p>
-
-    <table>
-        <tr>
-            <td>
-                <label>
-                    <input type="text" placeholder="Player name"/>
-                </label>
-            </td>
-            <td>
-                <button>Ready</button>
-            </td>
-            <td>
-                <button>Kick</button>
-            </td>
-        </tr>
-
-    </table>
-as
-    <button
-            onclick="switchPage('main-menu')"
-            class="select-indicator"
-    >
-    </button>
-</div>
-<!--====GAME====-->
-<div id="game">
-    <div id="game-screen">
-        <canvas id="game-canvas" width="800" height="600" style="border: red 1px solid"></canvas>
-    </div>
-</div>
-</body>
+            <div id="game-screen">
+                <canvas
+                    id="game-canvas"
+                    width="1000"
+                    height="800"
+                    style="border: red 1px solid"
+                ></canvas>
+                <div
+                    style="font-size: xx-large; font-family: Arial, serif"
+                    id="game-debug"
+                ></div>
+            </div>
+        </div>
+    </body>
 </html>

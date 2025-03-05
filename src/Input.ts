@@ -121,8 +121,6 @@ export class Input {
             true
         );
 
-        //TODO: [FIXME] fix mirroring of intersected tile
-
         if (intersection && intersection instanceof Tile) {
             World.instance.selectedTile = intersection
         }

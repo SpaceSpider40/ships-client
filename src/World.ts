@@ -51,6 +51,9 @@ export class World {
         this.createMap();
         console.log(`[WORLD] Attached objects: ${World.tickingObjects.toString()}`);
 
+        console.log(`[WORLD] Placeing vessels`);
+        WorldMap.instance.spawnVesseles()        
+
 
         //Call begin
         for (const obj of World.tickingObjects) {

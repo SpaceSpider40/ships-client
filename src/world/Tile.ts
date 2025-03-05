@@ -31,11 +31,41 @@ export default class Tile implements Object {
         World.instance.attachToTick(this);
     }
 
-    public tick(t: number): void {
-
+    public getAllNeighbors(): Hex[] {
+        return [
+            new Hex(
+                this.pos.q + 1,
+                this.pos.r,
+                this.pos.s - 1
+            ),
+            new Hex(
+                this.pos.q + 1,
+                this.pos.r - 1,
+                this.pos.s
+            ),
+            new Hex(
+                this.pos.q,
+                this.pos.r - 1,
+                this.pos.s + 1
+            ),
+            new Hex(
+                this.pos.q - 1,
+                this.pos.r,
+                this.pos.s + 1
+            ),
+            new Hex(
+                this.pos.q - 1,
+                this.pos.r + 1,
+                this.pos.s
+            ),
+            new Hex(
+                this.pos.q,
+                this.pos.r + 1,
+                this.pos.s - 1
+            )
+        ]
     }
 
-    public begin(): void {
-
-    }
+    public tick(t: number): void {}
+    public begin(): void {}
 }

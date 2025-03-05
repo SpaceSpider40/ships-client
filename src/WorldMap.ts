@@ -2,44 +2,57 @@
 import Hex from "./math/Hex";
 import Tile from "./world/Tile";
 import Point from "./math/Point";
+import DestroyerTile from "./world/DestroyerTile";
 
 export default class WorldMap {
     public static readonly instance: WorldMap = new WorldMap();
 
-    private tiles: Tile[] = []
+    private tiles: Tile[] = [];
 
-    private constructor() {
-
-    }
+    private constructor() {}
 
     public generateMap() {
-        //Todo: dynamical generate a random map
-
-        this.tiles = [
-            new WaterTile(new Hex(0, 1, -1)),
-            new WaterTile(new Hex(-1, 1, 0)),
-            new WaterTile(new Hex(0, 0, 0)),
-            new WaterTile(new Hex(1, -1, 0)),
-            new WaterTile(new Hex(1, -2, 0)),
-            new WaterTile(new Hex(2, -2, 0)),
-            new WaterTile(new Hex(0, -1, 1)),
-            new WaterTile(new Hex(0, -2, 2))
-        ]
+        this.spawnTile(new WaterTile(new Hex(0, 0, 0)));
     }
 
-    public checkIntersect(pos: Hex|Point, rtn:boolean=false): boolean|Tile {
+    public spawnVesseles(){
+        this.tiles.push(new DestroyerTile(new Hex(0, 0, 0)));
+    }
+
+    public checkIntersect(
+        pos: Hex | Point,
+        rtn: boolean = false
+    ): boolean | Tile {
         for (const tile of this.tiles) {
             let p = pos;
             if (p instanceof Point) {
-                p = p.toHex(tile.size, tile.sprite.offset);
+                p = p.toHex2(tile.size); //, tile.sprite.offset
             }
 
             if (tile.pos.equals(p)) {
-                console.log(tile.pos)
-                return rtn?tile:true;
+                return rtn ? tile : true;
             }
         }
 
         return false;
+    }
+
+    private spawnTile(originTile: Tile, depth: number = 0) {
+        this.tiles.push(originTile);
+
+        if (depth > 200) {
+            return;
+        }
+
+        originTile.getAllNeighbors().forEach((pos) => {
+            const rand = Math.random() * 100;
+            // console.log(rand)
+            if (
+                rand - depth/2 > 50 &&
+                this.tiles.findIndex((t) => t.pos.equals(pos)) == -1
+            ) {
+                this.spawnTile(new WaterTile(pos), depth + 1);
+            }
+        });
     }
 }
